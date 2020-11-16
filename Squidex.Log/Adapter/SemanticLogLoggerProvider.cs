@@ -55,6 +55,7 @@ namespace Squidex.Log.Adapter
 
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
         }
     }
 }

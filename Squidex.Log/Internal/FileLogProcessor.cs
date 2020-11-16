@@ -40,7 +40,7 @@ namespace Squidex.Log.Internal
             var fileInfo = new FileInfo(path);
             try
             {
-                if (!fileInfo.Directory.Exists)
+                if (!fileInfo.Directory!.Exists)
                 {
                     fileInfo.Directory.Create();
                 }
@@ -58,7 +58,7 @@ namespace Squidex.Log.Internal
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Log directory '{fileInfo.Directory.FullName}' does not exist or cannot be created.", ex);
+                throw new InvalidOperationException($"Log directory '{fileInfo.Directory!.FullName}' does not exist or cannot be created.", ex);
             }
         }
 
