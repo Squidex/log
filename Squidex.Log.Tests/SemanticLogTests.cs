@@ -115,7 +115,7 @@ namespace Squidex.Log
                     .WriteProperty("logLevel", "Fatal")
                     .WriteObject("app", a => a
                         .WriteProperty("name", "Squidex.Log.Tests")
-                        .WriteProperty("version", "1.0.0.0")
+                        .WriteProperty("version", GetType().Assembly.GetName().Version.ToString())
                         .WriteProperty("sessionId", sessionId.ToString())));
 
             Assert.Equal(expected, output);
