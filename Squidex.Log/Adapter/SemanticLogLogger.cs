@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Squidex.Text;
 
+#pragma warning disable IDE0066 // Convert switch statement to expression
+
 namespace Squidex.Log.Adapter
 {
     internal sealed class SemanticLogLogger : ILogger

@@ -6,6 +6,7 @@
 // ==========================================================================
 
 using System;
+using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -15,6 +16,7 @@ namespace Squidex.Log.Adapter
 {
     public class SemanticLogLoggerProvider : ILoggerProvider
     {
+        private readonly ConcurrentDictionary<string, SemanticLogLogger> loggers = new ConcurrentDictionary<string, SemanticLogLogger>();
         private readonly IServiceProvider services;
         private ISemanticLog? log;
 
@@ -47,10 +49,14 @@ namespace Squidex.Log.Adapter
                 return NullLogger.Instance;
             }
 
-            return new SemanticLogLogger(log.CreateScope(writer =>
-            {
-                writer.WriteProperty("category", categoryName);
-            }));
+            return loggers.TryGetValue(categoryName, out var logger) ?
+                logger :
+                loggers.GetOrAdd(categoryName, x =>
+                {
+                    var appender = new CategoryNameAppender(x);
+
+                    return new SemanticLogLogger(log.CreateScope(appender));
+                });
         }
 
         public void Dispose()

@@ -19,6 +19,8 @@ namespace Squidex.Log
 
         void Log(SemanticLogLevel logLevel, Exception? exception, LogFormatter action);
 
+        ISemanticLog CreateScope(ILogAppender appender);
+
         ISemanticLog CreateScope(Action<IObjectWriter> objectWriter);
     }
 }

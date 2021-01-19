@@ -89,7 +89,7 @@ namespace Squidex.Log
         [Fact]
         public void Should_log_values_with_appender()
         {
-            appenders.Add(new ConstantsLogWriter(w => w.WriteProperty("logValue", 1500)));
+            appenders.Add(new ConstantsLogAppender(w => w.WriteProperty("logValue", 1500)));
 
             Log.LogFatal(m => { });
 

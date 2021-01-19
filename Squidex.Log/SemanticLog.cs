@@ -137,11 +137,26 @@ namespace Squidex.Log
             }
         }
 
-        public ISemanticLog CreateScope(Action<IObjectWriter> objectWriter)
+        public ISemanticLog CreateScope(ILogAppender appender)
         {
-            var newAppenders = appenders.Union(Enumerable.Repeat(new ConstantsLogWriter(objectWriter), 1));
+            if (appender == null)
+            {
+                return this;
+            }
+
+            var newAppenders = appenders.Union(Enumerable.Repeat(appender, 1));
 
             return new SemanticLog(options, channels, newAppenders, writerFactory);
+        }
+
+        public ISemanticLog CreateScope(Action<IObjectWriter> objectWriter)
+        {
+            if (objectWriter == null)
+            {
+                return this;
+            }
+
+            return CreateScope(new ConstantsLogAppender(objectWriter));
         }
     }
 }
