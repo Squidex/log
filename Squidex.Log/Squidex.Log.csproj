@@ -20,15 +20,6 @@
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\Squidex.ruleset</CodeAnalysisRuleSet>
-    <UserSecretsId>d0e9b2dd-72d3-497a-8c1d-3945a7789b22</UserSecretsId>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
