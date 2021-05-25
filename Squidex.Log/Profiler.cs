@@ -25,6 +25,11 @@ namespace Squidex.Log
 
         public static event ProfilerStarted? SpanStarted;
 
+        public static bool HasListener
+        {
+            get => SpanStarted != null;
+        }
+
         static Profiler()
         {
             Cleaner = new AsyncLocalCleaner<ProfilerSession>(LocalSession);
