@@ -42,6 +42,11 @@ namespace Squidex.Log
             return Cleaner;
         }
 
+        public static IDisposable Noop()
+        {
+            return NoopDisposable.Instance;
+        }
+
         public static IDisposable TraceMethod(Type type, [CallerMemberName] string? memberName = null)
         {
             return Trace($"{type.Name}/{memberName}");
